@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<!-- ======================================================
+    Diderson Baka Web and Mobile Application Developer  
+    www.diderson.com
+
+    NOTE: This code is intellectual property of
+    Diderson Baka  and may not be
+    reproduced or used without prior permission.
+
+    Copyright 2016 Diderson Baka Web and Mobile Application Developer 
+    ======================================================  -->
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Diderson Baka">
+
+    <title>Front-end Interview Challenge</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Free weather API endpoint</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Forecast
+                    <small></small>
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+            <div class="bs-example" data-example-id="panel-without-body-with-table"> 
+                <div class="panel panel-default"> 
+                    <div class="panel-heading">Forecast details</div> 
+                    <table class="table"> 
+                        <thead> 
+                            <tr> 
+                                <th>Date</th>
+                                <th>High</th> 
+                                <th>Low</th>
+                                <th>Tex</th> 
+                            </tr> 
+                        </thead> 
+                        <tbody id="fdata"> 
+                        </tbody> 
+                    </table> 
+                </div> 
+            </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="" id="center" style="width: 100px; height: 100px; display: table; border:1px solid #000;">
+               <p>I’m Centered</p>
+            </div>
+        </div>
+
+         <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Diderson Baka 2016</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
+
+<script type="text/javascript">
+<!--
+$(document).ready(function() {
+    var APIurl = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22nome%2C%20ak%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
+    $.getJSON(APIurl, null, function (returnData) {
+
+        if (returnData) {
+            var forecastData = returnData.query.results.channel.item.forecast ;
+
+            if (forecastData.length > 0 ) {
+                $('#fdata').empty();
+                for (var i = 0; forecastData.length > i; i++) {
+                    $('#fdata').append('<tr><td>'+forecastData[i].date+'</td><td>'+forecastData[i].high+'</td><td>'+forecastData[i].low+'</td><td>'+forecastData[i].text+'</td></tr>'); 
+                }
+            } else {
+                alert('There is no data available yet');
+            }
+        }       
+    });
+
+    /*
+     *This function create 7 random unique numbers between 0 and 9.
+     *it returns array of 7 unique numbers
+    */
+
+    function generateSevenUniqueRandom() {
+        var finalArray = [];
+        while (finalArray.length < 7) {
+            var rand = Math.floor(Math.random() * 9) + 0; //generate random from 0-9
+            if((finalArray.indexOf(rand) > -1) !== true) {
+               finalArray.push(rand);
+            }
+        }
+        return finalArray;
+    }
+
+    /*
+    * Extend the JavaScript String object with an additional method that return the reverse of a string.
+    */
+    function reverseString(input) {
+        var i = 0;
+        revers = '';
+        while ( input[i] ) {
+                i++;
+        }
+        i--;
+        while ( input[i] ) {
+                revers += input[i];
+                i--;
+        }
+        return revers;
+    }
+
+
+    console.log('Number generator');
+    console.log('7 random unique numbers between 0 and 9: ', generateSevenUniqueRandom());
+
+    console.log('Object extension');
+    console.log('reverse of a string <Morning> : ', reverseString('Morning'));
+
+    /*
+    * Dom Positioning
+    */
+    $('#center p').css({'display' : 'table-cell', 'text-align' : 'center', 'vertical-align': 'middle'});
+});
+-->
+</script>
